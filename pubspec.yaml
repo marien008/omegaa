@@ -33,9 +33,11 @@ dependencies:
   flutter_typeahead: ^3.0.0
   fluttertoast: ^8.2.5
   flutter_native_splash: ^2.2.0+1
+  colorful_circular_progress_indicator: ^0.0.2
+  flutter_regex: ^0.0.3
 
 flutter_native_splash:
-  color: '#ffffff'
+  color: '#32BE9C'
   image: imagess/logoOmega.png
 
 

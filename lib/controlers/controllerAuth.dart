@@ -16,20 +16,19 @@ class controllerAuth{
   authPhar(){
     navigation(context,pageAuthentificationPharma());
   }
-  connecter(String login,String mot_de_passe)async{
+
+  Future<int> connecter(String login,String mot_de_passe)async{
+    int veri=0;
     var val =await ModelUtilisateur.connecter(login, mot_de_passe);
     if(val[0]==true){
-      if(val[1]=="cli"){
-        print("connecter");
-        navigation(context,accuilleClient([]));
-      }
-      else if(val[1]=="phar"){
-        print("connecter");
+       if(val[1]=="phar"){
+        veri=1;
         navigation(context,pageAccueille());
       }else {
-        print("connection impossible ");
+        veri=0;
       }
     }
+    return veri;
     }
 
   deconnecter(){

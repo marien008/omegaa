@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:omegaa/view/pharmacie/pageEnregistrement.dart';
+import 'package:colorful_circular_progress_indicator/colorful_circular_progress_indicator.dart';
+
 import '../../controlers/controler_client.dart';
 import '../../controlers/controler_pharmacie.dart';
 import '../../controlers/controllerAuth.dart';
@@ -9,11 +11,12 @@ import '../componentGenerale/Combobox.dart';
 import '../componentGenerale/InputCostom.dart';
 import '../componentGenerale/dialogue.dart';
 import '../componentGenerale/entete.dart';
+import '../componentGenerale/messageFlache.dart';
 import '../leyouts/base.dart';
 import 'component/Element.dart';
 import 'component/blockAuth.dart';
 import 'component/blockInt.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
 
 
 class pageAuthentificationPharma extends StatefulWidget {
@@ -24,21 +27,25 @@ class pageAuthentificationPharma extends StatefulWidget {
 }
 class pageAuthentificationState extends State<pageAuthentificationPharma> {
  late  List<Widget> action;
+ var attente=false;
+ Color colorConnect=Colors.white24;
+
   @override
   Widget build(BuildContext context) {
     action=[
-      ButtonCostom("Client", Colors.red,taille: 2, (){
-
-        Controler_client(context).ajouter();
+      ButtonCostom("Non", Colors.red,taille: 2, (){
+        setState(() {
+        });
 
       },
       ).lancer(),
-      ButtonCostom("Pharm", Color.fromRGBO(50, 190, 166, 1),taille: 2, (){
+      ButtonCostom("Oui", Color.fromRGBO(50, 190, 166, 1),taille: 2, (){
         Controler_pharmacie(context).ajouter();
 
       },
       ).lancer(),
     ];
+
 
     var h=MediaQuery.of(context).size;
     double largInp=h.width-18;
@@ -59,37 +66,48 @@ class pageAuthentificationState extends State<pageAuthentificationPharma> {
             content:blockAuth(
               "Authentifiez-vous",
                 blockInt(
-                    InputCostom(lar:longInp,long:largInp,fonctions: (v){
+                    InputCostom(lar:longInp,long:largInp,couleurBorder: colorConnect,fonctions: (v){
                       pageAuthentificationPharma.login=v;
                     },
                         value: "Entrez le login ",
                         couleur:colorInput
                     ).lancer(),
-                    InputCostom(lar:longInp,long:largInp,fonctions: (v){
+                    InputCostom(lar:longInp,long:largInp,couleurBorder: colorConnect,fonctions: (v){
                       pageAuthentificationPharma.password=v;
                     },
                         value: "Entrez le mot de passe ",
                         couleur:colorInput
                     ).lancer(),
-                  [
-                    Elemt("Creer un compte",(){
+                  [ColorfulCircularProgressIndicator(colors: [Colors.blue,Colors.green]),
+
+                    Elemt("Création du compte",(){
                       AlertDialogue(
                           Title: "Message",
                           contenue: "Voulez-vous créer un compte ?",
                           action:action,fonctionExte: (){
-
                       }
                       ).lancer(context);
-
                     }),
                     Elemt("Mot de passe oublier ?",(){})
                   ]
 
                 ),
-                ButtonCostom("Connexion",colorButton,(){
-                  controllerAuth(context).connecter( pageAuthentificationPharma.login,
+                ButtonCostom("Connexion",colorButton,()async{
+
+                  int v= await controllerAuth(context).connecter( pageAuthentificationPharma.login,
                       pageAuthentificationPharma.password);
-                }).lancer()
+                if(v==0){
+                  setState(() {
+                    colorConnect=Colors.red;
+                  });
+                  MessageFlache(message: "Mot de passe incorrecte");
+
+                }else{
+                  MessageFlache(message: "Vous êtes connecté");
+                }
+
+                }).lancer(),
+
             )  ,
             child: [
 //InkWell(

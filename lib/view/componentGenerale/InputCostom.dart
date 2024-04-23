@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_regex/flutter_regex.dart';
 
 class InputCostom {
   Function? fonctions;
@@ -9,6 +10,10 @@ class InputCostom {
   double elevation;
   var type;
   var estcache = false;
+  var exp=RegExp(r'^[A-Za-z]+$');
+  var isvalid=true;
+
+
 
 
 
@@ -23,6 +28,8 @@ class InputCostom {
     this.couleurBorder = Colors.white24,
     this.elevation = 0,
     this.valeurInterne=""
+
+
   });
 
   Widget lancer() {
@@ -31,6 +38,7 @@ class InputCostom {
       width: long.toDouble(),
       margin: EdgeInsets.zero, // Supprime l'espace autour du TextField
       decoration: BoxDecoration(
+
 
         boxShadow: [
           BoxShadow(
@@ -41,7 +49,7 @@ class InputCostom {
         ],
         color: this.couleur,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: this.couleurBorder),
+        border: Border.all(color: this.couleurBorder,width: 1.0),
       ),
       child: Theme(
         data: ThemeData(
@@ -53,7 +61,6 @@ class InputCostom {
         child:Center(
           child:TextField(
 
-
             obscureText: this.estcache,
             keyboardType: this.type,
             style: TextStyle(
@@ -61,10 +68,12 @@ class InputCostom {
             ),
             onChanged: (value) {
               fonctions!(value);
+             isvalid= exp.hasMatch(value);
             },
 
             decoration: InputDecoration(
               fillColor: Colors.blue,
+              errorText: isvalid?null:"error",
 
               hintText: this.value,
               border:OutlineInputBorder(

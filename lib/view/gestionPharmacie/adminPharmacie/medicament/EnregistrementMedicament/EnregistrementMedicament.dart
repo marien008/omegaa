@@ -5,6 +5,7 @@ import '../../../../componentGenerale/ButtonCostom.dart';
 import '../../../../componentGenerale/Combobox.dart';
 import '../../../../componentGenerale/InputCostom.dart';
 import '../../../../componentGenerale/entete.dart';
+import '../../../../componentGenerale/messageFlache.dart';
 import '../../../../leyouts/base.dart';
 import 'composant/BlockElement.dart';
 import 'composant/IconEnr.dart';
@@ -20,15 +21,7 @@ Future<void> verifification ( context,medicamentNom,
       medicamentDose,   medicamentUni
   ) ;
 
-  Fluttertoast.showToast(
-      msg: msg,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 2,
-      backgroundColor: Colors.blueGrey,
-      fontSize: 16.0
-  );
-
+ MessageFlache(message: msg);
 
 }
 
@@ -151,23 +144,12 @@ class EnregistrementMedicamentState extends State<EnregistrementMedicament> {
           print(medicamentNom);
 
           if(medicamentNom=="" || medicamentPrix =="" ||  medicamentDose==""){
-            print("hello");
-            Fluttertoast.showToast(
-                msg: "Entrer tout les champs svp!!",
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.BOTTOM,
-                timeInSecForIosWeb: 2,
-                backgroundColor: Colors.blueGrey,
-                fontSize: 16.0
-            );
-
+            MessageFlache(message: "Entrer tous les champs si possible");
           }else{
             verifification ( context,medicamentNom,
                 medicamentForm, medicamentPrix,
                 medicamentDose,   medicamentUni);
           }
-
-
 
         },taille: 14,mt: 6).lancer(),
 

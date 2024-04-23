@@ -5,7 +5,7 @@ class ButtonCostom{
 
   Color font;
   var mt,mb,ml,mr;
-  Function fonction;
+  Function  fonction;
   var taille;
   double rad;
 
@@ -32,6 +32,7 @@ class ButtonCostom{
           )
           ,
           decoration:BoxDecoration(
+            //border: Border.all(color: Colors.red),
               color: font,
               borderRadius: BorderRadius.all(Radius.circular(this.rad))
           )
