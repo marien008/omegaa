@@ -13,9 +13,11 @@ class Controler_medicament{
     navigation(context,EnregistrementMedicament());
   }
   Future<String> Enregistrer(nom, forme, prix, dose, unite) async{
+
       int verificationProd= await ModelMedicament(nom:nom,forme: forme,prix: prix,dose: dose,unite: unite).ajouter();
       if(verificationProd==0){
-        return "le produit existe deja";
+
+        return "le produit existe deja ou le champ est vide ";
       }else{
         ajouter();
         return  "produit  "+nom+forme+dose+unite+"ajouter avec succes";
