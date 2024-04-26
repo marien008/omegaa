@@ -31,6 +31,9 @@ class Controler_medicament{
     ModelMedicament.modifier(id_medicament, id_pharmacie,dateExpiration: dateExpiration,quantite: quantite,quantite_paquet:quantite_paquet );
     navigation(context, StockProduit(await ModelMedicament.afficher()));
   }
+  rechercher(String medoc)async{
+    return await ModelMedicament.rechercher(medoc);
+  }
 
 }
 

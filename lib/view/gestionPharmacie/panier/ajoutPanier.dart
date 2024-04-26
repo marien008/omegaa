@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:omegaa/elper/navigation.dart';
+import '../../../controlers/espacePharmacie/admin/controler_medicament.dart';
 import '../../../controlers/espacePharmacie/controlerVente.dart';
 import '../../../controlers/espacePharmacie/controler_panier.dart';
 import '../../../elper/Stringifier.dart';
@@ -21,6 +22,7 @@ import '../adminPharmacie/AcceuilAdmin.dart';
 
 class AjoutPanier extends StatefulWidget {
   var tampoProduit;
+
 
   AjoutPanier(this.tampoProduit);
 
@@ -218,7 +220,9 @@ class PanierState extends State<AjoutPanier> {
                   }, "Entrer la quantite du produit !");
                 }
               },
-                      InputRecherche(context, () {}, long: long - 130, larg: 40)
+                      InputRecherche(context, () async {
+                        print(await Controler_medicament(context).rechercher("h"));
+                      }, long: long - 130, larg: 40)
                           .lancer())
                   .createBlock(MediaQuery.of(context).size.width))
           .lancer(350, MediaQuery.of(context).size.width - 30),

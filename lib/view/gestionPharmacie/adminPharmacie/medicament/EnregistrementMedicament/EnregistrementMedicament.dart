@@ -141,7 +141,6 @@ class EnregistrementMedicamentState extends State<EnregistrementMedicament> {
           String medicamentDose=EnregistrementMedicament.doses ?? "";
           String medicamentUni=EnregistrementMedicament.unite ?? "";
 
-          print(medicamentNom);
 
           if(medicamentNom=="" || medicamentPrix =="" ||  medicamentDose==""){
             MessageFlache(message: "Entrer tous les champs si possible");

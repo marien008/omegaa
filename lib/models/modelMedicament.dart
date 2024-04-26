@@ -132,7 +132,7 @@ class ModelMedicament {
    String requette="select * from medicament inner join  medicamment_pharmacie on "+
        " medicamment_pharmacie.id_medicament=medicament.id_medicament inner join pharmacie "+
        " on pharmacie.id_pharmacie=medicamment_pharmacie.id_pharmacie "+
-       " where nom_medicament LIKE '$medoc%' ";
+       " where nom_medicament LIKE '$medoc%' and medicamment_pharmacie.id_pharmacie='$sess' ";
    var res=await base.reccuperationDonnees(requette);
    return  res;
 
@@ -146,6 +146,8 @@ class ModelMedicament {
      return  res;
 
    }
+
+
 
 
 @override

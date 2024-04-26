@@ -8,7 +8,7 @@ class MessageFlache{
 
   MessageFlache({required this.message});
   lancer(){
-    return Fluttertoast.showToast(
+     Fluttertoast.showToast(
         msg: this.message,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
