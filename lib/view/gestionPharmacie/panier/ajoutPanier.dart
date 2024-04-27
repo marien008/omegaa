@@ -221,7 +221,7 @@ class PanierState extends State<AjoutPanier> {
                 }
               },
                   InputRecherche(context, (x) {
-                    
+
                     FlutterRingtonePlayer.play(
                       android: AndroidSounds.notification,
                       ios: IosSounds.glass,
@@ -230,7 +230,7 @@ class PanierState extends State<AjoutPanier> {
                     );
                     FlutterRingtonePlayer.stop();
 
-                        print( Controler_medicament(context).rechercherVendre(x));
+                        
 
                       }, long: long - 130, larg: 40)
                           .lancer())
