@@ -143,7 +143,7 @@ class EnregistrementMedicamentState extends State<EnregistrementMedicament> {
 
 
           if(medicamentNom=="" || medicamentPrix =="" ||  medicamentDose==""){
-            MessageFlache(message: "Entrer tous les champs si possible");
+            MessageFlache(message: " veillez Entrer tous les champs si possible");
           }else{
             verifification ( context,medicamentNom,
                 medicamentForm, medicamentPrix,
