@@ -47,7 +47,7 @@ class PanierState extends State<PanierVente> {
               },
 
               text: "marien",
-              logo: "imagess/cadenat.png")
+              )
           .Demarrer(),
       body: Base(
           content: Tableau(

@@ -20,38 +20,54 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 
 class pageAuthentificationPharma extends StatefulWidget {
-  static String login="";
-  static String password="";
+
   @override
   State<pageAuthentificationPharma> createState() => pageAuthentificationState();
 }
+
 class pageAuthentificationState extends State<pageAuthentificationPharma> {
  late  List<Widget> action;
- var attente=false;
+ var valeurSecret=true;
+
+ String login="";
+ String password="";
+
+ //couleurs utilisées
+ var colorButton= Color.fromRGBO(50, 190, 166, 1);
+ var colorInput=Color.fromRGBO(230, 230, 230,1);
  Color colorConnect=Colors.white24;
 
   @override
   Widget build(BuildContext context) {
-    action=[
-      ButtonCostom("Non", Colors.red,taille: 2, (){
-        setState(() {
-        });
-
-      },
-      ).lancer(),
-      ButtonCostom("Oui", Color.fromRGBO(50, 190, 166, 1),taille: 2, (){
-        Controler_pharmacie(context).ajouter();
-
-      },
-      ).lancer(),
-    ];
-
     var h=MediaQuery.of(context).size;
     double largInp=h.width-18;
     var longInp=55;
 
-    var colorButton= Color.fromRGBO(50, 190, 166, 1);
-    var colorInput=Color.fromRGBO(230, 230, 230,1);
+// les champs ici deux
+    var login=  InputCostom(lar:longInp,long:largInp,couleurBorder: colorConnect,fonctions: (v){
+     this.login=v;
+    },
+        value: "Entrez le login",
+        couleur:colorInput
+    );
+
+    var mot_de_passe=   InputCostom(lar:longInp,changeAff:valeurSecret,estcache:true,long:largInp,couleurBorder: colorConnect,fonctions: (v){
+      this.password=v;
+    },
+        value: "Entrez le mot de passe ",
+        couleur:colorInput,fonctionCache: (){
+          setState(() {
+            if(valeurSecret==true){
+              valeurSecret=false;
+            }else{
+              valeurSecret=true;
+            }
+          });
+
+        }
+    );
+
+
     return Scaffold(
         appBar:Entete(
             flecheR: false,
@@ -59,70 +75,25 @@ class pageAuthentificationState extends State<pageAuthentificationPharma> {
             title: "",
             pageCible: null,
             text: "",
-            logo: null
+          notification: false
+
         ).Demarrer(),
+
         body:Base(
             content:blockAuth(
               "Authentifiez-vous",
                 blockInt(
-                    InputCostom(lar:longInp,long:largInp,couleurBorder: colorConnect,fonctions: (v){
-                      pageAuthentificationPharma.login=v;
-                    },
-                        value: "Entrez le login ",
-                        couleur:colorInput
-                    ).lancer(),
-                    InputCostom(lar:longInp,long:largInp,couleurBorder: colorConnect,fonctions: (v){
-                      pageAuthentificationPharma.password=v;
-                    },
-                        value: "Entrez le mot de passe ",
-                        couleur:colorInput
-                    ).lancer(),
-                  [
-
-                    Elemt("Création du compte",(){
-                      AlertDialogue(
-                          Title: "Message",
-                          contenue: "Voulez-vous créer un compte ?",
-                          action:action,fonctionExte: (){
-                      }
-                      ).lancer(context);
-                    }),
-                    Elemt("Mot de passe oublier ?",(){})
+                  [login.lancer(),
+                    mot_de_passe.lancer()
                   ]
                 ),
-                ButtonCostom("Connexion",attente:(attente==true)?true:false,colorButton,()async{
-                  setState(()async
-                  {
-                    attente=true;
-                    int v= await controllerAuth(context).connecter( pageAuthentificationPharma.login, pageAuthentificationPharma.password);
+                ButtonCostom("Connexion",colorButton,(){
 
-                    if(v==0){
-                      setState(() {
-                        colorConnect=Colors.red;
-                        attente=false;
-                        MessageFlache(message: "Mot de passe incorrecte");
-                      });
-
-
-                    }else{
-                      MessageFlache(message: "Vous êtes connecté");
-                    }
-                  });
-
-
-
-
-
+                     controllerAuth(context).connecter(this.login, this.password);
 
                 }).lancer(),
-
             )  ,
-            child: [
-//InkWell(
-  //child: Text("Connecter Client?"),
-//)
-
-            ]
+            child: []
         ).lancer(390,h.width-25)
     );
   }

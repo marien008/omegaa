@@ -37,7 +37,7 @@ class pageEnregistrementState extends State<pageEnregistrementClient> {
           title: "",
           pageCible: null,
           text: "",
-          logo: null
+
       ).Demarrer(),
 
       body:Base(

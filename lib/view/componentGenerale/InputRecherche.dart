@@ -9,7 +9,8 @@ class InputRecherche{
   String valeurInterne;
   double long,larg;
   FocusNode focus=FocusNode();
-  InputRecherche(this.context,this.f,{this.long=200,this.larg=20,this.valeurInterne=""});
+  Function ?Recherche;
+  InputRecherche(this.context,this.f,{this.long=200,this.larg=20,this.valeurInterne="",this.Recherche});
 
   lancer(){
 
@@ -30,18 +31,17 @@ class InputRecherche{
           focusNode: focus,
           controller: TextEditingController(text:valeurInterne ),
           onChanged: (z){
-
             this.f(z);
-
           },
           keyboardType:TextInputType.name,
           style: TextStyle(
-
             fontSize: 12,
             // height: 1.0
           ),
           decoration: InputDecoration(
-            prefixIcon: Icon(Icons.search),
+            prefixIcon:InkWell(child:Icon(Icons.search) ,onTap: (){
+              this.Recherche!();
+            },) ,
             hintText:"Recheche...",
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(50))

@@ -6,12 +6,12 @@ late var context;
 late var title;
 late Function ?pageCible;
 late var text;
- String  ?logo;
+ var  notification=true;
 late var flecheR;
 
 late Function ?actionLogo;
 
-  Entete({this.flecheR,this.context,this.title,required this.pageCible,this.text,this.logo,this.actionLogo}){
+  Entete({this.flecheR,this.context,this.title,required this.pageCible,this.text,this.notification=true,this.actionLogo}){
       if(this.flecheR==false){
         this.flecheR=null;
       }else{
@@ -35,13 +35,13 @@ late Function ?actionLogo;
             Container(
               child: Text(this.text),
             ),
-            (this.logo!=null)?
+            (this.notification)?
                 InkWell(
                   child:Container(
-                      child: Image.asset(this.logo!,width: 65)
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Icon(Icons.notifications,size: 30,)
                   ) ,
                   onTap: (){
-                    print("hello");
                     this.actionLogo!();
                   },
                 )

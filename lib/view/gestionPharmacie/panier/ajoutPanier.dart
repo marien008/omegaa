@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:omegaa/elper/navigation.dart';
 import '../../../controlers/espacePharmacie/admin/controler_medicament.dart';
+import '../../../controlers/espacePharmacie/controlerMedicament.dart';
 import '../../../controlers/espacePharmacie/controlerVente.dart';
 import '../../../controlers/espacePharmacie/controler_panier.dart';
 import '../../../elper/Stringifier.dart';
@@ -31,6 +32,7 @@ class AjoutPanier extends StatefulWidget {
 }
 
 class PanierState extends State<AjoutPanier> {
+  var recherche="";
   bool switchValue = false;
   int posCombo=0;
   int indexParcour = 0;
@@ -47,7 +49,6 @@ class PanierState extends State<AjoutPanier> {
     var long = MediaQuery.of(context).size.width;
     var larg = MediaQuery.of(context).size.height;
     double hauteur= MediaQuery.of(context).size.height;
-
     return Scaffold(
       appBar: Entete(
               flecheR: true,
@@ -57,7 +58,7 @@ class PanierState extends State<AjoutPanier> {
                 navigation(context, pageAccueille());
               },
               text: "",
-              logo: null)
+              )
           .Demarrer(),
       body: Base(
               child: [
@@ -122,24 +123,19 @@ class PanierState extends State<AjoutPanier> {
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Text(
-                                    (switchValue == false) ? "pièce" : "paquet"),
-                                SwitchCostum(
-                                        couleurActive: Color.fromRGBO(50, 190, 166, 1),
-                                        couleurDesactive: Colors.black,
-                                        f: (bool) {
-                                          setState(() {
-                                            if (tampoProduit[indexParcour]
-                                                    .quantite_gros ==
-                                                0) {
-                                              switchValue = false;
-                                            } else {
-                                              switchValue = bool;
-                                            }
-                                          });
-                                        },
-                                        value: switchValue)
-                                    .lancer()
+                                      SwitchCostum(f:(bool){
+                                        setState(() {
+                                          if (tampoProduit[indexParcour]
+                                              .quantite_gros ==
+                                              0) {
+                                            switchValue = false;
+                                          } else {
+                                            switchValue = bool;
+                                          }
+                                        });
+
+                                      },value: switchValue
+                                      ).lancer(),
                               ],
                             ),
                           ),
@@ -172,7 +168,9 @@ class PanierState extends State<AjoutPanier> {
                               } else {
                                 quantite = int.parse(e);
                               }
-                            }).lancer())
+                            }).lancer()
+
+                )
                     .afficheElement(),
                 ElementBlock(
                         "Prix",
@@ -220,9 +218,13 @@ class PanierState extends State<AjoutPanier> {
                   }, "Entrer la quantite du produit !");
                 }
               },
-                      InputRecherche(context, () async {
-                        print(await Controler_medicament(context).rechercher("h"));
-                      }, long: long - 130, larg: 40)
+                      InputRecherche(context, (v){
+                        this.recherche=v;
+
+                      }, long: long - 130, larg: 40,Recherche: (){
+                        ControlerMedicament(context).rechercherVente(this.recherche);
+
+                      })
                           .lancer())
                   .createBlock(MediaQuery.of(context).size.width))
           .lancer(350, MediaQuery.of(context).size.width - 30),
@@ -235,11 +237,12 @@ class PanierState extends State<AjoutPanier> {
     return Padding(
       child: Text(
         text,
-        style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold, color: c),
+        style: TextStyle(fontSize: 16,fontFamily: "roboto_medium", color: c),
       ),
       padding: EdgeInsets.only(top: 8, bottom: 8),
     );
   }
+
 
   alerteVente(Function action, String message) {
     return AlertDialogue(

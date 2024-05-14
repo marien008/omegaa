@@ -24,14 +24,15 @@ class pageAccueilleState extends State<pageAccueille> {
         appBar:  Entete(
             flecheR: false,
             context: context,
-            title: "",
+            title: "MN",
             pageCible: null,
             text:"",
-            logo: "imagess/Personne.png"
+
         ).Demarrer(),
         body: Base(
             child: [],
             content: Container(
+              padding: EdgeInsets.only(top:30),
                 width: MediaQuery
                     .of(context)
                     .size
@@ -45,24 +46,24 @@ class pageAccueilleState extends State<pageAccueille> {
                   crossAxisSpacing: 8.0,
                   mainAxisSpacing: 14.0,
                   children: <Widget>[
-                    ElementBlock1("imagess/logo medicament.png", "Vendre",
+                    ElementBlock1("imagess/vendre.png", "Vendre",
                             (){
                               Controler_panier(context).ajouterAuPanier();
                         }, context)
                         .afficheElement(),
                     ElementBlock1(
-                        "imagess/logoStocks.png", "Stock",  (){
+                        "imagess/gestion-de-linventaire.png", "Stock",  (){
                       Controler_medicament(context).voirStock();
                     },
                         context).afficheElement(),
-                    ElementBlock1("imagess/logoInvent.png", "Inventaire",
+                    ElementBlock1("imagess/inventaire.png", "Inventaire",
                             (){
                           Controler_inventaire(context).faireInventaire();
                         }, context).afficheElement(),
-                    ElementBlock1("imagess/logo vendeurs.png", "Vendeur",
+                    ElementBlock1("imagess/agent.png", "Vendeur",
                             (){}, context).afficheElement(),
                     ElementBlock1(
-                        "imagess/PAR.png", "Deco",  (){
+                        "imagess/deconnexion.png", "Deconnexion",  (){
                       controllerAuth(context).deconnecter();
 
                     },

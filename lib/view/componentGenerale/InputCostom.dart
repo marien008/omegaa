@@ -4,31 +4,31 @@ import 'package:flutter_regex/flutter_regex.dart';
 class InputCostom {
   Function? fonctions;
   String valeurInterne="";
-  var long, lar, value;
+  var long, lar, value="";
   Color couleur;
   Color couleurBorder;
+  Function?  fonctionCache;
   double elevation;
   var type;
   var estcache = false;
+  var changeAff=true;
   var exp=RegExp(r'^[A-Za-z]+$');
-  var isvalid=true;
-
-
-
+  var isvalid=false;
 
 
   InputCostom({
+    this.fonctionCache,
     this.fonctions,
     this.long = 80,
     this.lar = 40,
-    this.value,
+    this.value="",
     this.type = TextInputType.text,
     this.couleur = Colors.white,
     this.estcache = false,
     this.couleurBorder = Colors.white24,
     this.elevation = 0,
-    this.valeurInterne=""
-
+    this.valeurInterne="",
+    this.changeAff=false
 
   });
 
@@ -38,7 +38,7 @@ class InputCostom {
         children: [ Container(
           height: lar.toDouble(),
           width: long.toDouble(),
-          margin: EdgeInsets.zero, // Supprime l'espace autour du TextField
+          margin: EdgeInsets.zero,
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
@@ -60,21 +60,32 @@ class InputCostom {
               ),
               child:Center(
                 child:TextField(
-
-                  obscureText: this.estcache,
+                  obscureText:(this.estcache==true)?changeAff:this.estcache,
                   keyboardType: this.type,
                   style: TextStyle(
                     color: Colors.black,
                   ),
                   onChanged: (value) {
-                    fonctions!(value);
+                    this.fonctions!(value);
+
+                    this.valeurInterne=value;
+
+                    print(this.valeurInterne);
+
+
                     isvalid= exp.hasMatch(value);
                   },
 
                   decoration: InputDecoration(
+                    suffixIcon:(this.estcache==false)?null:GestureDetector(
+                    onLongPress: (){
+                    this.fonctionCache!();
+                  },onLongPressEnd: (s){
+                      this.fonctionCache!();
+                    },
+                      child:InkWell(child:Icon(Icons.remove_red_eye_outlined),) ,
+                    ) ,
                     fillColor: Colors.blue,
-                    errorText: isvalid?null:"error",
-
                     hintText: this.value,
                     border:OutlineInputBorder(
                         borderSide: BorderSide.none,

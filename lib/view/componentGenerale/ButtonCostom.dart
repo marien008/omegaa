@@ -24,12 +24,13 @@ class ButtonCostom{
               right:mr.toDouble()
           ),
           child:Padding(
-            child:(attente==false)? Text(text,
+            child: Text(text,
               style: TextStyle(
+                fontFamily: "roboto_medium",
                   fontSize: 17,
                   color: Colors.white
               ),
-            ):ColorfulCircularProgressIndicator(colors: [Colors.blue,Colors.green]) ,
+            ) ,
             padding: EdgeInsets.only(
                 top:taille.toDouble(),bottom: taille.toDouble(),left: (taille+23).toDouble(),right:(taille+23).toDouble()
             ),

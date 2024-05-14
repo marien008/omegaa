@@ -26,7 +26,7 @@ class TestState extends State<Test> {
           title: "Vente",
           pageCible:null,
           text: "marien",
-          logo: "imagess/cadenat.png"
+
       ).Demarrer(),
       body:GoogleMap(
         initialCameraPosition:

@@ -29,7 +29,7 @@ class accuilleClientState extends State<Parametre> {
           title: "",
           pageCible: null,
           text:"",
-          logo: "imagess/PAR.png",
+
 
       ).Demarrer(),
       body: Base(

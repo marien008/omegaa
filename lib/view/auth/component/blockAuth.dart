@@ -10,7 +10,8 @@ blockAuth(String entete,Widget block,Widget button){
       children: [
         Text(entete,
           style: TextStyle(
-              fontSize: 30,
+              fontSize: 33,
+              fontFamily: "roboto_Bold",
               color: Color.fromRGBO(50, 190, 166, 1)
           ),
 

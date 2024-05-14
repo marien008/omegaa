@@ -43,7 +43,7 @@ class pageInventaireState extends State<pageInventaire> {
               navigation(context, pageAccueille());
             },
             text: "marien",
-            logo: "imagess/Personne.png"
+
         ).Demarrer(),
         body: Base(
             child: [],

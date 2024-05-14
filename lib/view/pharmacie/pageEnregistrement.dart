@@ -37,7 +37,7 @@ class pageEnregistrementState extends State<pageEnregistrement> {
             title: "",
             pageCible: null,
             text: "",
-            logo: null
+
         ).Demarrer(),
 
         body:Base(
@@ -53,43 +53,11 @@ class pageEnregistrementState extends State<pageEnregistrement> {
                     couleur:colorInput
                   ).lancer(),
                   InputCostom(lar:longInp,long:largInp,fonctions: (val){
-                    pageEnregistrement.telephone=val;
-
-                  },
-                      value: "Telephone pharmacie",
-                      couleur: colorInput
-                  ).lancer(),
-                  Combobox(
-                    fonctions: (val,y){
-                      print(val);
-                      pageEnregistrement.ville=val;
-                    },elements: ["ville de résidance","Kinshasa"],
-                      large:longInp.toDouble() ,
-                      long: largInp,
-                    colorBordure: Colors.white24,
-                    colorInterne: colorInput
-                  ).lancer(),
-                  Combobox(
-                      fonctions: (val,f){
-                        pageEnregistrement.commune=val;
-                      },elements: ["commune résidence","kinshasa","mont-ngafula","matete"],
-                      large:longInp.toDouble() ,
-                      long: largInp,
-                      colorBordure: Colors.white24,
-                      colorInterne: colorInput
-                  ).lancer(i:0),
-                  InputCostom(lar:longInp,long:largInp,fonctions: (val){
-                    pageEnregistrement.adresseSup=val;
-                  },
-                      value: " rue et quartier",
-                      couleur: colorInput
-                  ).lancer(),
-                  InputCostom(lar:longInp,long:largInp,fonctions: (val){
                     pageEnregistrement.login=val;
-                  },
-                      value: "login",
-                      couleur: colorInput,
 
+                  },
+                      value: "Login",
+                      couleur: colorInput
                   ).lancer(),
                   InputCostom(lar:longInp,long:largInp,fonctions: (val){
                     pageEnregistrement.mot_de_passe=val;
@@ -109,9 +77,8 @@ class pageEnregistrementState extends State<pageEnregistrement> {
                   ).lancer(),
                   ButtonCostom("Créer le compte",colorButton,(){
                     Controler_pharmacie(context).Enregistrer(
-                        pageEnregistrement.nom_pharmacie,
-                        pageEnregistrement.ville,pageEnregistrement.commune,
-                      pageEnregistrement.adresseSup,pageEnregistrement.telephone,pageEnregistrement.mot_de_passe,pageEnregistrement.login);
+                        pageEnregistrement.nom_pharmacie,pageEnregistrement.login,
+                        pageEnregistrement.mot_de_passe,pageEnregistrement.mot_de_passeConf);
 
                   },rad: 9).lancer()
                 ],

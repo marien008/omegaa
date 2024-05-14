@@ -38,7 +38,7 @@ class accuilleClientState extends State<accuilleClient> {
           title: "",
           pageCible: null,
           text:"",
-          logo: "imagess/PAR.png",
+
           actionLogo: (){
             Controler_espace_client(context).parametre();
           }

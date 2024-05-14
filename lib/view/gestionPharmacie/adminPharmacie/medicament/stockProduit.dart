@@ -5,6 +5,7 @@ import 'package:omegaa/view/leyouts/base.dart';
 import 'package:omegaa/view/componentGenerale/TableauGen.dart';
 
 import '../../../../controlers/espacePharmacie/admin/controler_medicament.dart';
+import '../../../../controlers/espacePharmacie/controlerMedicament.dart';
 import '../../../../elper/Stringifier.dart';
 import '../../../../elper/formatDate.dart';
 import '../../../../elper/formatMois.dart';
@@ -15,6 +16,7 @@ import '../../../componentGenerale/ButtonCostom.dart';
 import '../../../componentGenerale/Combobox.dart';
 import '../../../componentGenerale/InputCostom.dart';
 import '../../../componentGenerale/InputRecherche.dart';
+import '../../../componentGenerale/SwitchCostum.dart';
 import '../../../componentGenerale/Tableau.dart';
 import '../../../componentGenerale/alertAjoutElement.dart';
 import '../../../componentGenerale/alerteActionUnique.dart';
@@ -32,6 +34,8 @@ class StockProduit extends StatefulWidget {
 }
 
 class StockProduitState extends State<StockProduit> {
+
+  var recherche="";
   int qte_paquet=0;
   int posCombo=0;
  int quantite=0;
@@ -66,7 +70,7 @@ class StockProduitState extends State<StockProduit> {
             navigation(context, pageAccueille());
           },
           text: "",
-          logo: "imagess/Personne.png"
+
       ).Demarrer(),
       body:Base(content: listeProduit(context),child: [Card(
         ),]
@@ -84,7 +88,13 @@ class StockProduitState extends State<StockProduit> {
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children:[
-              InputRecherche(larg:40,long: 270,context,(){}).lancer(),
+              InputRecherche(larg:40,long: 270,context,(v){
+                this.recherche=v;
+
+              },Recherche: (){
+                ControlerMedicament(context).rechercherStock(this.recherche);
+
+              }).lancer(),
               blockStock(
                   Combobox(
                       long:longElement+10 ,large: 40,
@@ -119,17 +129,19 @@ class StockProduitState extends State<StockProduit> {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text((switchValue==false)?"En pièce":"En paquet"),
-                    Switch(
-                        activeColor: Color.fromRGBO(50, 190, 166, 1),
-                       inactiveTrackColor: Colors.grey,
-                        inactiveThumbColor: Colors.black,
-                        value: switchValue,
-                        onChanged: ((bool){
-                          setState(() {
-                              switchValue = bool;
-                          });
-                        }))
+                    SwitchCostum(f:(bool){
+                      setState(() {
+                        if (tampoProduit[indexParcour]
+                            .quantite_gros ==
+                            0) {
+                          switchValue = false;
+                        } else {
+                          switchValue = bool;
+                        }
+                      });
+
+                    },value: switchValue
+                    ).lancer()
                   ],
                 ),
                 BlockDate(long:longElement, dateExp,(){

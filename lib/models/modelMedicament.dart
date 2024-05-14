@@ -39,13 +39,14 @@ class ModelMedicament {
 
   ajouter()async {
 
+
     int val=0;
 // requette de verification d'existance du medoc
     String redondance= "select * from medicament inner join  medicamment_pharmacie on "+
         " medicamment_pharmacie.id_medicament=medicament.id_medicament inner join pharmacie "+
             " on pharmacie.id_pharmacie=medicamment_pharmacie.id_pharmacie "+
         " where nom_medicament='$nom' and "+
-        " unite='$unite' and dose='$dose' and forme='$forme' and pharmacie.id_pharmacie=$sess ";
+        " unite='$unite' and dose='$dose' and forme='$forme' and pharmacie.id_pharmacie=1";
   var resultTest = await base.reccuperationDonnees(redondance);
 
     if(resultTest.length==0){
@@ -60,7 +61,7 @@ class ModelMedicament {
           "forme":this.forme
         });
         base.ajoutDonnees("medicamment_pharmacie",{"id_medicament":val,
-          "id_pharmacie":sess,"prix_medicament":this.prix,
+          "id_pharmacie":1,"prix_medicament":this.prix,
           "quantite_detail":this.quantite_detail,
           "date_expi_medicament":this.dateExpiration,
           "quantite_gros":this.quantite_gros,
@@ -69,7 +70,7 @@ class ModelMedicament {
 
       }else{
         base.ajoutDonnees("medicamment_pharmacie",{"id_medicament":resultTest2[0]["id_medicament"],
-          "id_pharmacie":sess,"prix_medicament":this.prix,
+          "id_pharmacie":1,"prix_medicament":this.prix,
           "quantite_detail":this.quantite_detail,
           "date_expi_medicament":this.dateExpiration,
           "quantite_gros":this.quantite_gros,
@@ -104,21 +105,28 @@ class ModelMedicament {
     return base.modifier(requette);
 
   }
+  static miseEnforme(var valeurEntre){
+    List<ModelMedicament> valeur=[];
+    for (int i =0; i<valeurEntre.length; i++){
+      valeur.add( ModelMedicament(nom:valeurEntre[i]["nom_medicament"],forme:valeurEntre[i]["forme"],prix:valeurEntre[i]["prix_medicament"]
+          ,dose:valeurEntre[i]["dose"],unite:valeurEntre[i]["unite"],dateExpiration:valeurEntre[i]["date_expi_medicament"],
+          quantite_detail:valeurEntre[i]["quantite_detail"],id:valeurEntre[i]["id_medicament"],
+          quantite_paquet:valeurEntre[i]["quantite_paquet"],quantite_gros:valeurEntre[i]["quantite_gros"]));
+    }
+    return valeur;
+  }
 
   static afficher()async {
     String requette="select * from medicament inner join  medicamment_pharmacie on "+
         " medicamment_pharmacie.id_medicament=medicament.id_medicament inner join pharmacie "+
         " on pharmacie.id_pharmacie=medicamment_pharmacie.id_pharmacie "+
-        " where medicamment_pharmacie.id_pharmacie='$sess'";
+        " where medicamment_pharmacie.id_pharmacie=$sess";
     var res=await base.reccuperationDonnees(requette);
+
+
     List<ModelMedicament> valeur=[];
-    for (int i =0; i<res.length; i++){
-    valeur.add( ModelMedicament(nom:res[i]["nom_medicament"],forme:res[i]["forme"],prix:res[i]["prix_medicament"]
-          ,dose:res[i]["dose"],unite:res[i]["unite"],dateExpiration:res[i]["date_expi_medicament"],
-        quantite_detail:res[i]["quantite_detail"],id:res[i]["id_medicament"],
-        quantite_paquet:res[i]["quantite_paquet"],quantite_gros:res[i]["quantite_gros"]   ));
-    }
-    return  valeur;
+
+    return  miseEnforme(res);
 
   }
 
@@ -134,7 +142,7 @@ class ModelMedicament {
        " on pharmacie.id_pharmacie=medicamment_pharmacie.id_pharmacie "+
        " where nom_medicament LIKE '$medoc%' and medicamment_pharmacie.id_pharmacie='$sess' ";
    var res=await base.reccuperationDonnees(requette);
-   return  res;
+   return  miseEnforme(res);
 
 }
    static filtrage(String commune,String medoc)async{
@@ -142,6 +150,15 @@ class ModelMedicament {
          " medicamment_pharmacie.id_medicament=medicament.id_medicament inner join pharmacie "+
          " on pharmacie.id_pharmacie=medicamment_pharmacie.id_pharmacie "+
          " where nom_medicament LIKE '$medoc%' and commune_pharmacie LIKE '$commune%' ";
+     var res=await base.reccuperationDonnees(requette);
+     return  res;
+
+   }
+   verificationDateExp()async{
+     String requette="select * from medicament inner join  medicamment_pharmacie on "+
+         " medicamment_pharmacie.id_medicament=medicament.id_medicament inner join pharmacie "+
+         " on pharmacie.id_pharmacie=medicamment_pharmacie.id_pharmacie "+
+         " where date_expi_medicament=  ";
      var res=await base.reccuperationDonnees(requette);
      return  res;
 

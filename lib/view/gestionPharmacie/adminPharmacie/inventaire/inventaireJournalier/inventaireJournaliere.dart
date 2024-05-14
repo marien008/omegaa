@@ -36,7 +36,7 @@ class inventaireJournaliereState extends State<inventaireJournaliere> {
               Controler_inventaire(context).faireInventaire();
             },
             text:"",
-            logo: "imagess/Personne.png"
+
         ).Demarrer(),
         body: Base(
             child: [],

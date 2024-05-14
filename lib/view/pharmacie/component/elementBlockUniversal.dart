@@ -17,18 +17,15 @@ class ElementBlock1 {
             Center(
               child:
               CircleAvatar(
+                child:Image.asset(this.photo,color: Color.fromRGBO(50, 190, 166, 1),) ,
                 radius:35,
-                backgroundColor: Color.fromRGBO(50, 190, 166, 1).withOpacity(0.1),
-                backgroundImage: AssetImage(this.photo),
+                backgroundColor: Colors.white,
+             
               ),
-            ),
-Center(
-  child:   Text(
-    this.text,
-    style: TextStyle(
-        color: Colors.black,
+            ), Center(child:Text(this.text, style: TextStyle(
+              fontFamily:"roboto_medium" ,
+                color:Color.fromRGBO(50, 190, 166, 1),
         fontSize: 16
-
     ),
   ) ,
 )

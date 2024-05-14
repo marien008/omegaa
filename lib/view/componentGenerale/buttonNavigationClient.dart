@@ -24,7 +24,6 @@ class ButtonNavigationClient {
     ["Vente", "imagess/logo voir.png",(c){
       ControlerVent(c).voirVenteJour();
     }],
-    ["Reservation", "imagess/Alerte.png",(){}]
   ];
 
   List<List<dynamic>> modelClient2=[

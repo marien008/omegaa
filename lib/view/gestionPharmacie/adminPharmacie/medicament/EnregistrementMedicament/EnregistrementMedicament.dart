@@ -52,14 +52,12 @@ class EnregistrementMedicamentState extends State<EnregistrementMedicament> {
             Controler_medicament(context).voirStock();
           },
           text: "",
-          logo: "imagess/Personne.png"
+
       ).Demarrer(),
       body: Base(content: listeProduit(context),child: []
       ).lancer(400,MediaQuery.of(context).size.width-30),
     );
   }
-
-
 
 
   Widget listeProduit(BuildContext context) {
@@ -103,14 +101,11 @@ class EnregistrementMedicamentState extends State<EnregistrementMedicament> {
           },
           value: "Dose"
       ).lancer()
-
-
-
       ,
       Combobox(
           colorInterne: Colors.white,
           long: 85,
-          fonctions: (v){
+          fonctions: (v,b){
 
             setState(() {
               EnregistrementMedicament.unite=v;
@@ -143,12 +138,8 @@ class EnregistrementMedicamentState extends State<EnregistrementMedicament> {
 
 
           if(medicamentNom=="" || medicamentPrix =="" ||  medicamentDose==""){
-<<<<<<< HEAD
             MessageFlache(message: " veillez Entrer tous les champs si possible");
-=======
-            MessageFlache(message: "Entrer tous les champs si possible");
 
->>>>>>> 70d15b3304d423e159cdf70414a8c5d72cb2ba70
           }else{
             verifification ( context,medicamentNom,
                 medicamentForm, medicamentPrix,

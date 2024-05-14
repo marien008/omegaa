@@ -57,7 +57,7 @@ class ReservationState extends State<Reservation> {
             navigation(context,accuilleClient([]));
           },
           text: "",
-          logo: null)
+          )
           .Demarrer(),
       body: Base(
           child: [],

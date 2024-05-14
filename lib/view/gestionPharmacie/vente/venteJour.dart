@@ -38,7 +38,7 @@ class VenteJourState extends State<VenteJour> {
 
             },
             text: "marien",
-            logo: "imagess/cadenat.png"
+
         ).Demarrer(),
 
         body:Base(

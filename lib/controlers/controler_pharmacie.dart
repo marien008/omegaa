@@ -17,14 +17,11 @@ class Controler_pharmacie{
     navigation(context,pageEnregistrement());
   }
 
-  Enregistrer(nom_pharmacie,ville,commune,
-      adresseSup,numeroPhone,mot_de_passe,login)async{
+  Enregistrer(nom_pharmacie,login,mot_de_passe,conf)async{
 
-    ModelPharmacie(nom_pharmacie,ville,commune,
-        adresseSup,numeroPhone,mot_de_passe,login).ajouter();
 
-    print([nom_pharmacie,ville,commune,
-        adresseSup,numeroPhone,mot_de_passe]);
+    ModelPharmacie("omega","omega","omega").ajouter();
+
     print(await ModelPharmacie.affId(2));
     navigation(context,pageAuthentificationPharma());
   }

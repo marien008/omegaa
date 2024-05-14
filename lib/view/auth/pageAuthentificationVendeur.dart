@@ -15,6 +15,7 @@ class pageAuthentification extends StatefulWidget {
   @override
   State<pageAuthentification> createState() => pageAuthentificationState();
 }
+
 class pageAuthentificationState extends State<pageAuthentification> {
   @override
   Widget build(BuildContext context) {
@@ -22,8 +23,6 @@ class pageAuthentificationState extends State<pageAuthentification> {
     var h=MediaQuery.of(context).size;
     double largInp=h.width-10;
     var longInp=55;
-
-
     var colorButton= Color.fromRGBO(50, 190, 166, 1);
     var colorInput=Color.fromRGBO(230, 230, 230,1);
     return Scaffold(
@@ -33,7 +32,7 @@ class pageAuthentificationState extends State<pageAuthentification> {
             title: "",
             pageCible: null,
             text: "",
-            logo: null
+
         ).Demarrer(),
         body:Base(
             content: Column(
@@ -44,7 +43,8 @@ class pageAuthentificationState extends State<pageAuthentification> {
                       polyElement(
                           175,
                         [
-                          InputCostom(lar:longInp,long:largInp,fonctions: (){},
+                          InputCostom(lar:longInp,long:largInp,fonctions: (){
+                          },
                               value: "Entrer le nom du pharmacie",
                               couleur:colorInput
                           ).lancer(),
