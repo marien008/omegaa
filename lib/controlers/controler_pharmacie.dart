@@ -26,4 +26,8 @@ class Controler_pharmacie{
     navigation(context,pageAuthentificationPharma());
   }
 
+  static existe(){
+    ModelPharmacie.existe();
+  }
+
 }

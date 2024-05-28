@@ -27,5 +27,23 @@ class ModelPharmacie  {
     return ModelPharmacie.base.reccuperationDonnees(requette);
   }
 
+  static existe() async{
+
+    var test=false;
+    String requette="select * from pharmacie ";
+    var v= await ModelPharmacie.base.reccuperationDonnees(requette);
+
+    if(v.isEmpty){
+      test=true;
+      await ModelPharmacie.base.ajoutDonnees("pharmacie",{"nom_pharmacie":"omega",
+        "login":"omega",
+        "mot_passe":"omega",
+      });
+    }
+
+return test;
+
+  }
+
 
 }

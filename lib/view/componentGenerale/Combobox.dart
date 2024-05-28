@@ -57,7 +57,6 @@ class Combobox {
                 child: Padding(
                   padding: EdgeInsets.only(left: 17),
                   child: Text(
-
                     itm,
                     overflow: TextOverflow.visible,
                     style: TextStyle(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_regex/flutter_regex.dart';
 
 class InputCostom {
+  var negative=true;
   Function? fonctions;
   String valeurInterne="";
   var long, lar, value="";
@@ -17,6 +19,7 @@ class InputCostom {
 
 
   InputCostom({
+    this.negative=true,
     this.fonctionCache,
     this.fonctions,
     this.long = 80,
@@ -60,17 +63,21 @@ class InputCostom {
               ),
               child:Center(
                 child:TextField(
+                  inputFormatters:(TextInputType.number==this.type)?[FilteringTextInputFormatter.allow(RegExp(r'^[0-9]*$')),]:[],
                   obscureText:(this.estcache==true)?changeAff:this.estcache,
                   keyboardType: this.type,
                   style: TextStyle(
                     color: Colors.black,
                   ),
                   onChanged: (value) {
-                    this.fonctions!(value);
+
+                      this.fonctions!(value);
+
+
 
                     this.valeurInterne=value;
 
-                    print(this.valeurInterne);
+
 
 
                     isvalid= exp.hasMatch(value);

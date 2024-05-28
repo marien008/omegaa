@@ -46,7 +46,7 @@ class PanierState extends State<PanierVente> {
                 //controllerMedicament(context).vendreMedicament();
               },
 
-              text: "marien",
+              text: "",
               )
           .Demarrer(),
       body: Base(
@@ -73,7 +73,7 @@ class PanierState extends State<PanierVente> {
                 height: 40,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
+                  children: (!this.donnee.isEmpty)? [
                     ButtonCostom("Annuler", Colors.red, () {
                       AlertAjoutElement(nomClient: (e) {}, () {
                         Session.increPanier = 0;
@@ -108,7 +108,7 @@ class PanierState extends State<PanierVente> {
                           .lancer();
                     }, taille: 3, mt: 0)
                         .lancer(),
-                  ],
+                  ]:[],
                 ))
           ]).lancer(330, MediaQuery.of(context).size.width - 30),
       bottomNavigationBar: ButtonNavigationClient(context: context, model: 1)

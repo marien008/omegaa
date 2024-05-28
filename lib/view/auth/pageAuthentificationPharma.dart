@@ -9,6 +9,7 @@ import 'package:omegaa/elper/navigation.dart';
 import '../componentGenerale/ButtonCostom.dart';
 import '../componentGenerale/Combobox.dart';
 import '../componentGenerale/InputCostom.dart';
+
 import '../componentGenerale/dialogue.dart';
 import '../componentGenerale/entete.dart';
 import '../componentGenerale/messageFlache.dart';
@@ -84,7 +85,8 @@ class pageAuthentificationState extends State<pageAuthentificationPharma> {
               "Authentifiez-vous",
                 blockInt(
                   [login.lancer(),
-                    mot_de_passe.lancer()
+                    mot_de_passe.lancer(),
+
                   ]
                 ),
                 ButtonCostom("Connexion",colorButton,(){

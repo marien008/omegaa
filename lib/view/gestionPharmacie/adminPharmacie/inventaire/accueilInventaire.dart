@@ -42,7 +42,7 @@ class pageInventaireState extends State<pageInventaire> {
             pageCible:(){
               navigation(context, pageAccueille());
             },
-            text: "marien",
+            text: "",
 
         ).Demarrer(),
         body: Base(

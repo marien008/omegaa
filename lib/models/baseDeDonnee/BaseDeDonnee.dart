@@ -16,13 +16,12 @@ class BaseDeDonnee {
 
   Future<Database> createDatabase () async {
     Directory directory=await getApplicationDocumentsDirectory();
-    final path=join(directory.path,"omegapharma2002.db");
+    final path=join(directory.path,"omegapharmaR.db");
     return await openDatabase(
       path,
       version:1,
         onCreate: onCreate
     );
-
 
   }
   onCreate(Database database,int version)async{
@@ -59,11 +58,19 @@ class BaseDeDonnee {
     ''');
 
     await database.execute('''
+    CREATE TABLE Notification(
+    id_notification INTEGER  PRIMARY KEY AUTOINCREMENT ,
+    id_pharmacie INTEGER,
+    id_medicament  INTEGER
+    )
+    ''');
+
+    await database.execute('''
     CREATE TABLE pharmacie(
-    id_pharmacie INTEGER PRIMARY KEY AUTOINCREMENT,
-    nom_pharmacie TEXT NOT NULL,
-   login TEXT NOT NULL,
-    mot_passe TEXT NOT NULL
+    id_pharmacie INTEGER PRIMARY KEY AUTOINCREMENT ,
+    nom_pharmacie TEXT NOT NULL  ,
+   login TEXT NOT NULL  ,
+    mot_passe TEXT NOT NULL 
     )
     ''');
     await database.execute('''

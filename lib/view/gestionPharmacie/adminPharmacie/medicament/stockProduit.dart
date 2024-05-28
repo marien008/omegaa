@@ -118,6 +118,7 @@ class StockProduitState extends State<StockProduit> {
                     )  ,
                   ),
                   InputCostom(
+                    negative: false,
                     type: TextInputType.number,
                     long: longQte,
                     value: "Quant",fonctions: (v){
@@ -131,13 +132,8 @@ class StockProduitState extends State<StockProduit> {
                   children: [
                     SwitchCostum(f:(bool){
                       setState(() {
-                        if (tampoProduit[indexParcour]
-                            .quantite_gros ==
-                            0) {
-                          switchValue = false;
-                        } else {
                           switchValue = bool;
-                        }
+
                       });
 
                     },value: switchValue
@@ -194,7 +190,9 @@ class StockProduitState extends State<StockProduit> {
             height: 250,
             child: Tableau(["Produit","Prix","Pièces","Paquets","Expiration"],
                 StringifierTab(this.tampoProduit),
-                MediaQuery.of(context).size.width-30).lancer(),
+                MediaQuery.of(context).size.width-30,f:(b){
+
+                }).lancer(),
           )
     ]
     )

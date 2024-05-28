@@ -9,7 +9,6 @@ class Panier{
   Panier(this.contenue);
 
   ajouterElement(element){
-    print(element);
 
     this.contenue.add(element);
     miseEnpropre();

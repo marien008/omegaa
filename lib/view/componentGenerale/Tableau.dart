@@ -1,5 +1,7 @@
 
 import 'package:flutter/material.dart';
+
+import 'InkWellCostum.dart';
 class Tableau {
 
   double widthParent=0;
@@ -7,10 +9,11 @@ class Tableau {
   int pas=7;
 
 
+Function ?f;
   List<String>Entete;
   List<List<dynamic>> contenue;
 
-  Tableau(this.Entete,this.contenue,this.widthParent);
+  Tableau(this.Entete,this.contenue,this.widthParent,{this.f});
 
 
 
@@ -81,9 +84,16 @@ class Tableau {
         );
       }
 
-      listElement.add(Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children:listCont,
+      listElement.add(InkWellCostum(
+        onTap: (){
+
+        },
+        id:"hello" ,
+        child:Row(
+
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children:listCont,
+        ) ,
       ));
       if(i<contenue.length-1){
         listElement.add(Divider(thickness: 1,));

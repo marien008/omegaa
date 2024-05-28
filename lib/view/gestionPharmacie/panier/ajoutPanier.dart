@@ -23,12 +23,12 @@ import '../adminPharmacie/AcceuilAdmin.dart';
 
 class AjoutPanier extends StatefulWidget {
   var tampoProduit;
+int index=0;
 
-
-  AjoutPanier(this.tampoProduit);
+  AjoutPanier(this.tampoProduit,{index=0});
 
   @override
-  State<AjoutPanier> createState() => PanierState(this.tampoProduit);
+  State<AjoutPanier> createState() => PanierState(this.tampoProduit,indexParcour: index);
 }
 
 class PanierState extends State<AjoutPanier> {
@@ -42,7 +42,7 @@ class PanierState extends State<AjoutPanier> {
   Color appBarColor = Color.fromRGBO(50, 190, 166, 1);
   late Color colorButton = Color.fromRGBO(50, 190, 166, 1);
 
-  PanierState(this.tampoProduit);
+  PanierState(this.tampoProduit,{this.indexParcour=0});
 
   @override
   Widget build(BuildContext context) {
@@ -62,42 +62,7 @@ class PanierState extends State<AjoutPanier> {
           .Demarrer(),
       body: Base(
               child: [
-            ButtonCostom("Valider", colorButton, () {
-              if (!tampoProduit.isEmpty && quantite != 0) {
-                var element = [
-                  tampoProduit[indexParcour].id.toString(),
-                  tampoProduit[indexParcour].toString(),
-                  (tampoProduit[indexParcour].prix.toString() + "fc")
-                      .toString(),
-                  quantite.toString(),
-                  (quantite * int.parse(tampoProduit[indexParcour].prix!))
-                      .toString()
-                ];
-                AlertAjoutElement(
-                        nomClient: (e) {
-                          nom = e;
-                        },
-                        avecTextFiel: true,
-                        () {
-                          ControlerVent(context)
-                              .ajouterUnevente([element], nom);
-                          var ControlerPanier = Controler_panier(context);
-                          ControlerPanier.vider();
-                        },
-                        () {
-                          Controler_panier(context).voirPanier();
-                        },
-                        context,
-                        "Voulez vous valider ?",
-                        "Message")
-                    .lancer();
-              } else {
-                alerteVente(() {
-                  Controler_panier(context).ajouterAuPanier();
-                }, "Entrer la quantite du produit !");
-              }
-            }, mt: hauteur-720)
-                .lancer(),
+
           ],
               content: BlockVente([
                 ElementBlock(
@@ -113,7 +78,7 @@ class PanierState extends State<AjoutPanier> {
                                 },
                                 elements: StringifierCombo(tampoProduit),
                                 colorBordure: Color.fromRGBO(228, 228, 228, 1))
-                            .lancer(i:posCombo))
+                            .lancer(i:indexParcour))
                     .afficheElement(),
                 ElementBlock(
                         element3: Container(
@@ -142,6 +107,7 @@ class PanierState extends State<AjoutPanier> {
                         ),
                         "Quantite",
                         InputCostom(
+                          negative: false,
                             type: TextInputType.number,
                             lar: 30,
                             couleurBorder: Colors.black,
@@ -210,7 +176,7 @@ class PanierState extends State<AjoutPanier> {
                         .toString(),
                     tampoProduit[indexParcour].quantite_paquet
                   ];
-                  Controler_panier(context).Enregistrer(element);
+                  Controler_panier(context).Enregistrer(element,indexParcour);
                   print("ajout avec succes");
                 } else {
                   alerteVente(() {
@@ -221,9 +187,10 @@ class PanierState extends State<AjoutPanier> {
                       InputRecherche(context, (v){
                         this.recherche=v;
 
+                        print(long);
+
                       }, long: long - 130, larg: 40,Recherche: (){
                         ControlerMedicament(context).rechercherVente(this.recherche);
-
                       })
                           .lancer())
                   .createBlock(MediaQuery.of(context).size.width))

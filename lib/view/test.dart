@@ -4,7 +4,7 @@ import 'package:omegaa/view/leyouts/base.dart';
 import 'componentGenerale/Tableau.dart';
 import 'componentGenerale/entete.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
+import 'package:map_launcher/map_launcher.dart';
 
 
 class Test extends StatefulWidget{

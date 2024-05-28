@@ -6,6 +6,8 @@ import 'optionButtonNavigation.dart';
 
 
 class ButtonNavigationClient {
+
+  static var couleurChoix=0;
   List<List<dynamic>> modelClient=[ 
     
     ["Reservation", "imagess/logoArgentNoSelect.png",(){}],
@@ -16,13 +18,16 @@ class ButtonNavigationClient {
   List<List<dynamic>> modelPharmacie=[
     ["Vendre", "imagess/logoArgent.png",(c){
       Controler_panier(c).ajouterAuPanier();
+      ButtonNavigationClient.couleurChoix=1;
     }],
     ["Panier", "imagess/logoPnier.png",(c){
       Controler_panier(c).voirPanier();
+      ButtonNavigationClient.couleurChoix=2;
 
     },Session.increPanier],
     ["Vente", "imagess/logo voir.png",(c){
       ControlerVent(c).voirVenteJour();
+      ButtonNavigationClient.couleurChoix=3;
     }],
   ];
 

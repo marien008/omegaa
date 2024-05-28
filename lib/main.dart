@@ -6,8 +6,12 @@ import 'package:omegaa/view/auth/pageAuthentificationVendeur.dart';
 import 'package:omegaa/view/pharmacie/pageEnregistrement.dart';
 import 'package:omegaa/view/test.dart';
 
+import 'controlers/controler_pharmacie.dart';
+import 'controlers/espacePharmacie/controlerMedicament.dart';
+
 void main() {
 
+  ControlerMedicament.verificationQuantite();
   runApp(const MyApp());
 }
 

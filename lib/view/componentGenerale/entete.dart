@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../controlers/espacePharmacie/controlerMedicament.dart';
+
 
 class Entete {
 late var context;
@@ -42,7 +44,7 @@ late Function ?actionLogo;
                       child: Icon(Icons.notifications,size: 30,)
                   ) ,
                   onTap: (){
-                    this.actionLogo!();
+                    ControlerMedicament(context).VoirNotif();
                   },
                 )
             :Center()

@@ -42,6 +42,7 @@ for(int i =0; i<this.ligneVente.length; i++){
         "quantite":this.ligneVente[i][3],
         "montant":this.ligneVente[i][4]}
   );
+  return 0;
 }
 
 return idVente;

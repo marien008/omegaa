@@ -72,7 +72,7 @@ class EnregistrementMedicamentState extends State<EnregistrementMedicament> {
               value: "Nom du produit"
           ).lancer(),
 
-          IconEnr(width, Icons.add)
+          IconEnr(width, Icons.data_saver_off_outlined)
         ]).lancer()
         ,
         LigneElement([
@@ -92,7 +92,7 @@ class EnregistrementMedicamentState extends State<EnregistrementMedicament> {
               ],
               colorBordure: Colors.white
           ).lancer(),
-          IconEnr(width, Icons.add)
+          IconEnr(width, Icons.data_saver_off_outlined)
         ]).lancer(),
     LigneElement([
       InputCostom(type:TextInputType.number,elevation:5,long: width-140,lar: 50,
@@ -126,7 +126,7 @@ class EnregistrementMedicamentState extends State<EnregistrementMedicament> {
               },
               value: "prix"
           ).lancer(),
-          TextEnr("Fc",width-330)
+          TextEnr("Fc",85.0)
         ]).lancer(),
 
         ButtonCostom("Enregistrer",Color.fromRGBO(50, 190, 166, 1),(){

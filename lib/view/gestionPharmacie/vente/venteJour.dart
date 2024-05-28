@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:omegaa/view/leyouts/base.dart';
-
-
 import '../../componentGenerale/Tableau.dart';
-
 import '../../componentGenerale/buttonNavigationClient.dart';
 import '../../componentGenerale/entete.dart';
 import 'component/VenteBlock.dart';
-
-
 
 class VenteJour extends StatefulWidget {
 
@@ -37,7 +32,7 @@ class VenteJourState extends State<VenteJour> {
             pageCible:(){
 
             },
-            text: "marien",
+            text: "",
 
         ).Demarrer(),
 
@@ -64,14 +59,11 @@ class VenteJourState extends State<VenteJour> {
   List <Widget> pretraitement(List<  List< List<List<String>>>> ventes){
     List <Widget> element=[];
     for(int i=0; i<ventes.length; i++){
-     int a= i+1;
+     int a=ventes.length - i;
       element.add( VenteBlock(numeroVente: "$a", nomProp: ventes[i][0][0][0], heure: ventes[i][0][0][1],contenue:
-      Tableau(["Produit","Quantite","Total"],ventes[i][1],MediaQuery.of(context).size.width-88).lancer(),montant:  ventes[i][0][0][2]+" Fc",));
-
+      Tableau(["Produits","Quantite","Total"],ventes[i][1],MediaQuery.of(context).size.width-88).lancer(),montant:  ventes[i][0][0][2]+" Fc",));
    }
-
     return element;
-
   }
 }
 
